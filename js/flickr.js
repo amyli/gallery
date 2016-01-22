@@ -1,4 +1,4 @@
-'use strict';
+// add missing semicolons, fix setkey arg
 
 function Flickr() {
 
@@ -10,12 +10,49 @@ function Flickr() {
   _this.currentPage = 1;
 
   var apiKey = '';
-  var baseUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&per_page=30&format=json&nojsoncallback=1&api_key='
+  var baseUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&per_page=30&format=json&nojsoncallback=1&api_key=';
+
+  // PRIVATE FUNCTIONS
+
+  // put together Flickr image url
+  function createImageURL(img, size) {
+    return 'https://farm' + img.farm + '.staticflickr.com/' + img.server +
+           '/' + img.id + '_' + img.secret + size + '.jpg';
+  }
+
+  // all the cool xhr stuff here
+  function makeRequest(url, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+
+    xhr.onload = function() {
+      // on error
+      if(xhr.status !== 200) {
+        return cb({
+          error: 'Could not retrieve photos. :(',
+          statusCode: xhr.status
+        });
+      }
+      // otherwise, return parsed JSON
+      return cb(null, JSON.parse(xhr.response));
+    };
+
+    xhr.onerror = function() {
+      return cb({
+        error: 'Could not retrieve photos. :(',
+        statusCode: xhr.status
+      });
+    };
+
+    xhr.send();
+  }
+
+  // PUBLIC FUNCTIONS
 
   // sets your personal Flickr API key
-  _this.setKey = function(apiKey) {
+  _this.setKey = function(key) {
     apiKey = key;
-  }
+  };
 
   _this.retrievePhotos = function(query, cb) {
     _this.currentSearch = query.search || _this.currentSearch;
@@ -50,37 +87,5 @@ function Flickr() {
       page: _this.currentPage++
     }, cb);
   };
-
-  // put together Flickr image url
-  function createImageURL(img, size) {
-    return 'https://farm' + img.farm + '.staticflickr.com/' + img.server + '/' + img.id + '_' + img.secret + size + '.jpg'
-  }
-
-  // all the cool xhr stuff here
-  function makeRequest(url, cb) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-
-    xhr.onload = function() {
-      // on error
-      if(xhr.status !== 200) {
-        return cb({
-          error: 'Could not retrieve photos. :(',
-          statusCode: xhr.status
-        });
-      }
-      // otherwise, return parsed JSON
-      return cb(null, JSON.parse(xhr.response));
-    };
-
-    xhr.onerror = function() {
-      return cb({
-        error: 'Could not retrieve photos. :(',
-        statusCode: xhr.status
-      });
-    };
-
-    xhr.send();
-  }
 
 }
