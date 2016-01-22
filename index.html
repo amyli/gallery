@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+    <header class="container">
+      <!-- search form -->
+      <input type="text" class="search" placeholder="double rainbow" />
+    </header>
+
+    <!-- image grid -->
+    <section class="grid"></section>
+    <a class="show-more btn btn-hidden">Show More</a>
+
+    <!-- lightbox -->
+    <section class="lightbox lightbox-hide">
+      <div class="lightbox-off">&times;</div>
+      <div class="lightbox-display">
+        <div class="lightbox-photo">
+          <img class="lightbox-photo-src" alt="">
+          <h2 class="lightbox-title"></h2>
+        </div>
+      </div>
+
+      <!-- lightbox controls -->
+      <div class="lightbox-ctrl-container">
+        <div class="lightbox-ctrl lightbox-ctrl-prev lightbox-ctrl-disable">
+          <div class="lightbox-btn lightbox-btn-prev">&#x21DA;</div>
+        </div>
+        <div class="lightbox-ctrl lightbox-ctrl-next lightbox-ctrl-disable">
+          <div class="lightbox-btn lightbox-btn-prev">&#x21DB;</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="loading page"></div>
+    <div class="error page"></div>
+
+    <script type="text/javascript" src="js/flickr.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/lightbox.js"></script>
+    <script type="text/javascript" src="js/grid.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+  </body>
+</html>
