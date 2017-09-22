@@ -2,7 +2,7 @@
 
 Photo search and lightbox feature, courtesy of the [Flickr API](https://www.flickr.com/services/api/).
 
-__Demo:__ http://amyyli.com/gallery/
+__Demo:__ https://amy.fm/gallery/
 
 ### Usage
 
